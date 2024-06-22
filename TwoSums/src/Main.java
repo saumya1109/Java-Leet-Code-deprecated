@@ -3,8 +3,10 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        int[] array = {2, 9, 7, 14};
-        int target = 9;
+        int[] array = {3, 2, 4};
+/*        int[] array = {3, 3};
+        int[] array = {2, 7, 9,14};*/
+        int target = 6;
 
         //Brute Force Approach
 
@@ -36,17 +38,18 @@ public class Main {
     }
 
     public static int[] twoSumsComplement(int[] array, int target) {
-        Map<Integer, Integer> map= new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
 
-        for(int i=0;i< array.length;i++) {
-            map.put(array[i],i);
+        for (int i = 0; i < array.length; i++) {
+            map.put(array[i], i);
         }
 
-        for(Integer num : map.keySet() ) {
-            int complement = target-num;
-            if(map.containsKey(complement)) {
-                return new int[]{map.get(num), map.get(complement)};
+        for (int i = 0; i < array.length; i++) {
+            int complement = target - array[i];
+            if (map.containsKey(complement) && map.get(complement) != i) {
+                return new int[]{i, map.get(complement)};
             }
+
         }
         return new int[]{};
     }
