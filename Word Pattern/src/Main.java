@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        String pattern = "abba", s = "dog cat cat dog";
+        String pattern = "abba", s = "dog cat cat fish";
         boolean out = wordMatchesIndex(pattern, s);
         System.out.println(out);
 
@@ -42,33 +42,32 @@ public class Main {
 
     public static boolean wordMatchesIndex(String pattern, String s) {
 
-
         String[] array = s.split(" ");
 
         if (pattern.length() != array.length) return false;
+
+        //TODO simplify it by taking char and word in a variable to make it more readable...
 
         Map<Character, String> charToString = new HashMap<>();
         Map<String, Character> stringToChar = new HashMap<>();
 
         for (int i = 0; i < array.length; i++) {
-            char c = pattern.charAt(i);
-            String word = array[i];
 
-            if (!charToString.containsKey(c)) {
-                charToString.put(c, word);
-            } else if (!charToString.get(c).equals(word)) {
-                return false;
+            if (!charToString.containsKey(pattern.charAt(i))) {
+                charToString.put(pattern.charAt(i), array[i]);
             }
 
-            if (!stringToChar.containsKey(word)) {
-                stringToChar.put(word, c);
-            } else if (!stringToChar.get(word).equals(c)) {
+            if (!stringToChar.containsKey(array[i])) {
+                stringToChar.put(array[i], pattern.charAt(i));
+            }
+
+            if ((!charToString.get(pattern.charAt(i)).equals(array[i])) ||
+                    (!stringToChar.get(array[i]).equals(pattern.charAt(i)))) {
                 return false;
+
             }
         }
 
         return true;
-
-
     }
 }
