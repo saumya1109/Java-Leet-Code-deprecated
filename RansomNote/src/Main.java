@@ -6,35 +6,28 @@ public class Main {
         String a = "ba";
         String b = "baa";
 
-        System.out.println(isRandsome(a,b));
-
-
+        System.out.println(canConstruct(a, b));
     }
 
-    public static boolean isRandsome(String a, String b) {
-        char[] aArray =a.toCharArray();
-        char[] bArray = b.toCharArray();
+    public static boolean canConstruct(String ransomNote, String magazine) {
+        Map<Character, Integer> ransomMap = new HashMap<>();
+        Map<Character, Integer> magazineMap = new HashMap<>();
 
-        Map<Character, Integer> aMap= new HashMap<>();
-        Map<Character, Integer> bMap= new HashMap<>();
-
-        for(int i=0; i<aArray.length;i++) {
-            aMap.put(aArray[i], aMap.getOrDefault(aArray[i],0)+1);
+        for (int i = 0; i < ransomNote.length(); i++) {
+            ransomMap.put(ransomNote.charAt(i), ransomMap.getOrDefault(ransomNote.charAt(i), 0) + 1);
         }
 
-        for(int i=0; i<bArray.length;i++) {
-            bMap.put(bArray[i], bMap.getOrDefault(bArray[i],0)+1);
+
+        for (int i = 0; i < magazine.length(); i++) {
+            magazineMap.put(magazine.charAt(i), magazineMap.getOrDefault(magazine.charAt(i), 0) + 1);
         }
 
-        for (Character chars: aMap.keySet()) {
-
-            if(aMap.get(chars) ==bMap.get(chars)){
-                return true;
+        for (Character key : ransomMap.keySet()) {
+            if (!magazineMap.containsKey(key) || ransomMap.get(key) > magazineMap.get(key)) {
+                return false;
             }
         }
 
-
-        return false;
-
+        return true;
     }
 }
