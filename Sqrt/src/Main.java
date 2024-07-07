@@ -7,7 +7,7 @@ public class Main {
     public static int findSqrt(int x) {
         if (x == 0 || x == 1) return x;
 
-        int left = 0;
+        int left = 1;
         int right = x;
 
         while (left <=right) {
